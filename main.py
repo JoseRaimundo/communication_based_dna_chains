@@ -16,11 +16,14 @@ def getTd():
 def getU():
     return t-(vec_x/cd)
 
+
 # Return the inpuse response
 def getG():  
     division_element = math.sqrt(t**2 - ((vec_x/cd)**2))
-    return getU()*(e**(-(t/2*getTd())))*(math.cos(division_element)/division_element)
+    return getU()*(np.exp(-(t/2*getTd())))*(math.cos(division_element)/division_element)
      
+
+
 
 
 # the wavefront speed

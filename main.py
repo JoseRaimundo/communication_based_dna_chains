@@ -1,9 +1,5 @@
 import math
-
-
-
-time_vec
-
+import numpy as np
 
 #Return the diffusin coeficient
 def getD():
@@ -16,23 +12,27 @@ def getTd():
     Td = 0.01
     return Td
 
-# Ignore
 # The step function
-def getU(t, vec_x, cd):
+def getU():
     return t-(vec_x/cd)
 
-
-def getG():
-    cd = math.sqrt(getD()/getTd())
-
-    division_element = math.sqrt(t**2 - ((vec_x/cd)**2))))
-
-    Gd = (t-(vec_x/cd))*(e**(-(t/2*getTd())))*(math.cos(division_element)/division_element)
+# Return the inpuse response
+def getG():  
+    division_element = math.sqrt(t**2 - ((vec_x/cd)**2))
+    return getU()*(e**(-(t/2*getTd())))*(math.cos(division_element)/division_element)
+     
 
 
-# Dimension
-n_dim = 1
+# the wavefront speed
+cd = math.sqrt(getD()/getTd())
+
+# A multidimensional vector of distance from the transmitter and cd
+vec_x = 0
+
+vec_time = 0
+
+t = 0
 
 
-# A vector multidimensional
-vec_x = ?
+# Test
+print(getG())

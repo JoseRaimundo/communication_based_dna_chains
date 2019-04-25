@@ -3,7 +3,8 @@ def teste2():
     print(n)
 
 def teste():
+    n = 1
     teste2()
 
-n = 1
+
 teste()

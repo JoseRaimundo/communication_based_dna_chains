@@ -1,6 +1,9 @@
 import math
 import numpy as np
 import random
+import data
+print(data.genereteCoordinates(1))
+
 # particle_max = 50
 # dimensions = 3
 # range_scale = 10
@@ -65,6 +68,18 @@ import random
 # plt.legend()
 # plt.show()
 
-x = np.sin(1)
-print(np.arctan(x))
+
+# a = 2.3
+# print(a.real)
+
+# print(a.imag)
+# print(a)
+
+# print(np.arctan(x))
+# print(x)
+# print(abs(x))
+
+
+# a = [1,2,3]
+# print(np.amax(a))
 

@@ -2,7 +2,7 @@ import math
 import numpy as np
 import random
 import data
-print(data.genereteCoordinates(1))
+# print(data.genereteCoordinates(1))
 
 # particle_max = 50
 # dimensions = 3
@@ -83,3 +83,11 @@ print(data.genereteCoordinates(1))
 # a = [1,2,3]
 # print(np.amax(a))
 
+import numpy as np
+b = [[0, 1, 2,],[0, 1, 2,],[0, 1, 2,]]
+a = np.array(b)
+
+# a = a**2
+# print(a/2)
+
+np.cos(2)

@@ -84,12 +84,19 @@ import data
 # print(np.amax(a))
 
 import numpy as np
-b = [0, 1, 2]
-a = np.array(b)
+# b = [0, 1, 2]
+# a = np.array(b)
 
 # a = a**2
 # print(a/2)
 
 # np.cos(2)
 
-print(a+1)
+# print(np.arange(1,51))
+
+a = np.arange(1,10)
+b = np.arange(1,10)
+
+for i, t in zip(a, b):
+    print("i = ", i)
+    print("t = ", t)

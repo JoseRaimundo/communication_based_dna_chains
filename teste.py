@@ -84,10 +84,12 @@ import data
 # print(np.amax(a))
 
 import numpy as np
-b = [[0, 1, 2,],[0, 1, 2,],[0, 1, 2,]]
+b = [0, 1, 2]
 a = np.array(b)
 
 # a = a**2
 # print(a/2)
 
-np.cos(2)
+# np.cos(2)
+
+print(a+1)

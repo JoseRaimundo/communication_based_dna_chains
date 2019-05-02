@@ -80,8 +80,7 @@ import data
 # print(abs(x))
 
 
-# a = [1,2,3]
-# print(np.amax(a))
+
 
 import numpy as np
 # b = [0, 1, 2]
@@ -94,9 +93,30 @@ import numpy as np
 
 # print(np.arange(1,51))
 
-a = np.arange(1,10)
-b = np.arange(1,10)
+# a = np.arange(1,10)
+# b = np.arange(1,10)
 
-for i, t in zip(a, b):
-    print("i = ", i)
-    print("t = ", t)
+# for i, t in zip(a, b):
+#     print("i = ", i)
+#     print("t = ", t)
+
+# print(np.random.rand(50)*10**-6)
+# import random
+
+# result = []
+# for i in range(50):
+#     result.append(random.uniform(0.1,1) * 10**-6)
+    
+# result = np.array(result)
+# print(result)
+
+# array = np.array([[(1*10**-12), 2, 3], [4, 5, 6], [7, 8, 9]])
+# print(array)
+# print(np.fft.rfft(array))
+
+a =  np.array([[1,2,3, 7, 2, 3]])
+# print(np.amax(a))
+
+
+
+print((np.arange(1,(1001*2))/1000))

@@ -5,17 +5,18 @@ import random
 # Transmitter-receiver distance from 0μm to 50μm and a frequency spectrum from 0Hz to 1kHz
 def genereteDistance(particle_max):
     result = []
-    for i in range(particle_max):
+    return np.arange(0,50*10**-6, 10**-8)
+    #for i in range(particle_max):
         ##randon
         ##result.append(random.uniform(0.1,1) * 10**-6)
         ##range
-        result.append(i * 10**-9)
-    return  np.array(result)
+    #     result.append(i * 10**-6)
+    # return  np.array(result)
 
 # Return time arange
 def genereteTime(total_time):
     # Retorna o tempo particionado em 1Khtz (frequencia da amostragem presente no artigo)
-    return (np.arange(1,(total_time) + 1)/1000)
+    return (np.arange(0,total_time, total_time/100))
 
 ''' 
 The diffusion coefficient is the one of calcium 
@@ -48,13 +49,16 @@ def gd():
     cd = np.sqrt(getD()/getTd())
     
     for x in vec_x:
-        if t < x/cd:
+        if t < abs(x)/cd:
             vec_gd.append(0)
         else:
-            vec_gd.append(np.exp(-(t/2*getTd()))*(np.cos(np.sqrt(t**2 - ((x/cd)**2)))/np.sqrt(t**2 - ((x/cd)**2))))
+            # print(np.exp(-(t/(2*getTd()))))
+            vec_gd.append(np.exp(-(t/(2*getTd())))*(np.cosh(np.sqrt(t**2 - ((abs(x)/cd)**2)))/np.sqrt(t**2 - ((abs(x)/cd)**2))))
+            
     return vec_gd
 
 def getB():
+    # print(gd())
     return np.fft.fft(gd())
 
 '''The normalized gain ΓB(f) of the propagation module
@@ -66,15 +70,15 @@ def normalizeGain():
 
 def getPhaseB():
     b = getB()
-    #return np.arctan(.imag/b.real)
-    return np.arctan(b.real)
+    return np.arctan(b.imag/b.real)
+    # return np.arctan(b.real)
 
 def getDelay():
     return -np.diff(getPhaseB())
 
 
 # Time
-total_time = 100
+total_time = 10**-6
 time_vec    = genereteTime(total_time)
 
 #Distances
@@ -83,14 +87,6 @@ vec_x   = genereteDistance(particle_max)
 
 ignore_key_y = 0
 for time in time_vec:
-    ignore_key_x = 0    
-    if ignore_key_y < 10:
-        ignore_key_y = 1 + ignore_key_y
-    else:
-        for i in getDelay():
-            # ignorar a primeira linha X
-            if ignore_key_x <= 0:
-                ignore_key_x = ignore_key_x + 1
-            else:
-                print(abs(i), end=",")
-        print()
+    for i in getDelay():
+        print(abs(i), end=",")
+    print()

@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import random
-import data
+# import data
 # print(data.genereteCoordinates(1))
 
 # particle_max = 50
@@ -114,9 +114,13 @@ import numpy as np
 # print(array)
 # print(np.fft.rfft(array))
 
-a =  np.array([[1,2,3, 7, 2, 3]])
-# print(np.amax(a))
+# a =  np.array([[1,2,3, 7, 2, 3]])
+# # print(np.amax(a))
 
 
 
-print((np.arange(1,(1001*2))/1000))
+# print((np.arange(1,(1001*2))/1000))
+print("italo")
+print(np.arange(0, 50*10**-6, 50*10**-8))
+print("z")
+print((np.arange(0, 50)*10**-6))

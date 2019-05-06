@@ -1,2 +1,6 @@
 import numpy as np
-print(np.exp(2))
+def get():
+    return 2**n
+n = 3
+print(np.fft.fft2(get()))
+

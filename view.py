@@ -14,7 +14,7 @@ data = [
     )
 ]
 layout = go.Layout(
-    title='Mt Bruno Elevation',
+    title='Delay',
     autosize=False,
     width=600,
     height=600,
@@ -27,11 +27,11 @@ layout = go.Layout(
     scene={"xaxis": {'title':"Distance [μm]", "tickfont": {"size": 10}, 'type': "linear"},
                    "yaxis": {'title': "Frequency [x10 Hz]", "tickfont": {"size": 10},
                              "tickangle": 1},
-                   "zaxis": {'title': "Delay [sec]",
+                   "zaxis": {'title': "Delay [s]",
                              "tickfont": {"size": 10}},
                    "camera": {"eye": {"x": 2, "y": 1, "z": 1.25}},
                    "aspectmode": "cube",
                    }
 )
 fig = go.Figure(data=data, layout=layout)
-py.plot(fig, filename='delay_chart')
+py.plot(fig, filename='delay_chart.html')

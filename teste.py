@@ -120,7 +120,11 @@ import numpy as np
 
 
 # print((np.arange(1,(1001*2))/1000))
-print("italo")
-print(np.arange(0, 50*10**-6, 50*10**-8))
-print("z")
-print((np.arange(0, 50)*10**-6))
+# print("italo")
+# print(np.arange(0, 50*10**-6, 50*10**-8))
+# print("z")
+# print((np.arange(0, 50)*10**-6))
+
+teste = np.array([1, 2, 3])
+teste = np.flip(teste, 0)
+print(teste)

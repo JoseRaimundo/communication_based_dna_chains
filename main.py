@@ -92,8 +92,8 @@ def getPhaseB():
 def getDelay():
     #phiB, f = getPhaseB()
     phiB = getPhaseB()
-    return -(np.diff(phiB))#/np.diff(f))
-    #return -(np.diff(phiB)/np.diff(2*np.pi*getFrequency(frequecy_max, phiB.size)))
+    # return -(np.diff(phiB))/np.diff(f)
+    return -(np.diff(phiB)/np.diff(2*np.pi*getFrequency(frequecy_max, phiB.size)))
 
 # Time
 total_time = 1e-8
@@ -104,12 +104,22 @@ time_vec    = genereteTime(total_time)
 frequecy_max = 1e3
 
 #Distances
-particle_max = 50e-10
+particle_max = 50e-11
 vec_x   = genereteDistance(particle_max)
 #print(max(vec_x))
+teste = []
+chave = True
 
+#
+# vec_x = np.flip(vec_x, 0)
+# print(vec_x)
 for distance in vec_x:
-    for i in getDelay():
+    if chave:
+        chave = False
+        teste = getDelay();
+    else:
+        teste = teste + getDelay()
+    for i in teste:
         #i=0
         print(i, end=",")
     print()

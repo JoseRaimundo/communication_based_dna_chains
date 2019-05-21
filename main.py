@@ -6,9 +6,9 @@ def genereteDistance(particle_max):
     return np.arange(0,particle_max, particle_max/100)
 
 # Return time arange
-def genereteTime(total_time):
+def genereteTime(total_time, x_r):
     # Retorna o tempo particionado em 1kHz (frequencia da amostragem presente no artigo)
-    return (np.arange(0,total_time, total_time/50))
+    return (np.arange(x_r+total_time/10000,total_time, (total_time-x_r+total_time/10000)/100))
 
 # Return the frequency spectrum from 0 Hz to 1kHz
 def getFrequency(frequecy_max, N):
@@ -44,22 +44,27 @@ def gd():
     cd = np.sqrt(getD()/getTd())
 
     for t in time_vec:
-        if t <= abs(x)/cd:
-            continue
-            #vec_gd.append(0)
-        else:
-            """
-            print("x = ", x)
-            print("t = ", t)
-            print("Argumento = ", -(t/(2*getTd())))
-            print("Exponencial = ", np.exp(-(t/(2*getTd()))))
-            print("Arg cosh = ", t**2 - (abs(x)/cd)**2)
-            print("Cosh = ", np.cosh(np.sqrt(t**2 - (abs(x)/cd)**2)))
-            print("Raiz = ", np.sqrt(t**2 - (abs(x)/cd)**2))
-            """
-            vec_gd.append(np.exp(-t/(2*getTd()))*(np.cosh(np.sqrt(t**2 - (abs(x)/cd)**2))/np.sqrt(t**2 - (abs(x)/cd)**2)))
-
-    #print(vec_gd)
+        # print("t ", t)
+        # print("x ", abs(x)/cd)
+        # if t <= abs(x)/cd:
+        #     continue
+        #     #vec_gd.append(0)
+        # else:
+            
+            # print("x = ", x)
+            # print("t = ", t)
+            # print("Argumento = ", -(t/(2*getTd())))
+            # print("Exponencial = ", np.exp(-(t/(2*getTd()))))
+            # print("Arg cosh = ", t**2 - (abs(x)/cd)**2)
+            #print("Cosh = ", np.cosh(np.sqrt(t**2 - (abs(x)/cd)**2)/(2*getTd())))
+            # print("Raiz = ", np.sqrt(t**2 - (abs(x)/cd)**2))
+        gd_temp = np.exp(-t/(2*getTd()))*(
+                    (np.cosh(np.sqrt(t**2 - (abs(x)/cd)**2)/(2*getTd())))/
+                    np.sqrt(t**2 - (abs(x)/cd)**2)
+                    )
+        vec_gd.append(gd_temp)
+            
+            #print("Gd = ",gd_temp)
     return vec_gd
 
 def getB():
@@ -72,7 +77,8 @@ by its maximum value max f(|B̃(f)|)'''
 def normalizeGain():
     b = getB()
     return 10*np.log10(abs(b[int(b.size/2):b.size])/(np.amax(abs(b[int(b.size/2):b.size]))))
-
+    #return (abs(b.size)/(np.amax(abs(b))))
+    
 def getPhaseB():
     b = getB()
     b = b[int(b.size/2):b.size]
@@ -93,18 +99,18 @@ def getDelay():
     #phiB, f = getPhaseB()
     phiB = getPhaseB()
     # return -(np.diff(phiB))/np.diff(f)
+    #return -np.diff(getPhaseB())
+
     return -(np.diff(phiB)/np.diff(2*np.pi*getFrequency(frequecy_max, phiB.size)))
 
-# Time
-total_time = 1e-8
-time_vec    = genereteTime(total_time)
+
 #print(time_vec)
 
 # Frequency
 frequecy_max = 1e3
 
 #Distances
-particle_max = 50e-11
+particle_max = 50e-8
 vec_x   = genereteDistance(particle_max)
 #print(max(vec_x))
 teste = []
@@ -114,11 +120,15 @@ chave = True
 # vec_x = np.flip(vec_x, 0)
 # print(vec_x)
 for distance in vec_x:
+    # Time
+    total_time = 1e-6
+    time_vec    = genereteTime(total_time, distance)
     if chave:
         chave = False
-        teste = getDelay();
+        teste = (getDelay());
     else:
-        teste = teste + getDelay()
+        teste = teste + (getDelay())
+    # teste = getDelay()
     for i in teste:
         #i=0
         print(i, end=",")

@@ -3,12 +3,12 @@ import math
 
 # Transmitter-receiver distance from 0μm to 50μm and a frequency spectrum from 0Hz to 1kHz
 def genereteDistance(particle_max):
-    return np.arange(0,particle_max, particle_max/100)
+    return np.arange(0,particle_max, particle_max/50)
 
 # Return time arange
 def genereteTime(total_time, x_r):
     # Retorna o tempo particionado em 1kHz (frequencia da amostragem presente no artigo)
-    return (np.arange(x_r+total_time/10000,total_time, (total_time-x_r+total_time/10000)/100))
+    return (np.arange(x_r+total_time/10000,total_time, (total_time-x_r+total_time/10000)/200))
 
 # Return the frequency spectrum from 0 Hz to 1kHz
 def getFrequency(frequecy_max, N):

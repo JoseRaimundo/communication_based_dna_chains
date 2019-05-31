@@ -128,3 +128,28 @@ import numpy as np
 teste = np.array([1, 2, 3])
 teste = np.flip(teste, 0)
 print(teste)
+
+
+
+#####3 Plotagem em 2D
+
+# import matplotlib.pyplot as plt
+# import plotly.offline as py
+# import plotly.graph_objs as go
+# import pandas as pd
+# import numpy as np
+
+
+# data = np.genfromtxt('data.csv',delimiter=',')
+
+# tamanhos = [1, 2, 3]
+# cont = 0
+# for d in data:
+#     frequency = np.linspace(0, 1, len(d))
+#     plt.plot(frequency, d, label="Tamanho " + str(tamanhos[cont]), linewidth=1)
+#     plt.legend(loc='upper right')
+#     cont = cont + 1
+
+# plt.xlabel('Frequency [x10 Hz]')
+# plt.ylabel('Delay [s]')
+# plt.show()

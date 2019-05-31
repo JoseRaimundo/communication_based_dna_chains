@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import csv
 
 
 # Transmitter-receiver distance from 0μm to 50μm and a frequency spectrum from 0Hz to 1kHz
@@ -92,7 +93,14 @@ for distance in vec_x:
 
 
 data = np.transpose(np.asarray(data))
-for i in data:
-    for j in i:
-        print(j, end=",")
-    print()
+# for i in data:
+#     for j in i:
+#         print(j, end=",")
+#     print()
+
+with open('data.csv', mode='w') as employee_file:
+    employee_writer = csv.writer(employee_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+    for i in data:
+        employee_writer.writerow(i)
+    
+

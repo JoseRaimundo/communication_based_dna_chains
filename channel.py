@@ -1,18 +1,18 @@
 import numpy as np
 import math
 import csv
-
+import os
 
 # Transmitter-receiver distance from 0μm to 50μm and a frequency spectrum from 0Hz to 1kHz
-def genereteDistance(particle_max):
+def genereteDistance(particle_max = 50e-12):
     return np.arange(0,particle_max, particle_max/50)
 
 # Return time arange
-def genereteTime(total_time):
+def genereteTime(total_time = 1e-8):
     return (np.arange(0,total_time, total_time/220))
 
 # Return the frequency spectrum from 0 Hz to 1kHz
-def getFrequency(frequecy_max, N):
+def getFrequency(frequecy_max = 1e3, N = 0):
     return np.arange(0, frequecy_max, frequecy_max/N)
 
 #Return the diffusin coeficient
@@ -64,43 +64,66 @@ def getPhaseB():
             phaseB.append(np.arctan(imaginary/real))
     return np.asarray(phaseB)
 
+
 def getDelay():
     phiB = getPhaseB()
+    return -(np.diff(phiB)/np.diff(2*np.pi*getFrequency(N = phiB.size)))
 
-    return -(np.diff(phiB)/np.diff(2*np.pi*getFrequency(frequecy_max, phiB.size)))
+
+# Apaga arquivos de dados antigos
+def cleanFile():
+    dir = os.listdir()
+    for file in dir:
+        if file == "data_delay.csv":
+            os.remove(file)
+        elif file == "data_gain.csv":
+            os.remove(file)
 
 # Time
-total_time = 1e-8
-time_vec    = genereteTime(total_time)
-
-# Frequency
-frequecy_max = 1e3
+time_vec  = genereteTime()
 
 #Distances
-particle_max = 50e-12
-vec_x   = genereteDistance(particle_max)
-teste = []
+vec_x   = genereteDistance()
+
+
+temp_delay = []
+temp_gain = []
 chave = True
 
-data = [] 
+data_delay = [] 
+data_gain = [] 
 for distance in vec_x:
     if chave:
         chave = False
-        teste = getDelay()+ 0.0005
+        temp_delay = getDelay()+ 0.0005
+        temp_gain  = normalizeGain()
     else:
-        teste = teste + getDelay() + 0.0005
-    data.append(teste)
-
-
-data = np.transpose(np.asarray(data))
-# for i in data:
-#     for j in i:
-#         print(j, end=",")
-#     print()
-
-with open('data.csv', mode='w') as employee_file:
-    employee_writer = csv.writer(employee_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
-    for i in data:
-        employee_writer.writerow(i)
+        temp_delay = temp_delay + getDelay() + 0.0005
+        temp_gain  = temp_gain + normalizeGain() 
     
+    data_delay.append(temp_delay)
+    data_gain.append(temp_gain)
+
+
+# Apagando arquivos csv antigos
+cleanFile()
+
+
+data_delay =    np.transpose(np.asarray(data_delay))
+data_gain   =   np.transpose(np.asarray(data_gain))
+
+
+# Salva  dados do delay direto em um csv
+with open('data_delay.csv', mode='w') as delay_file:
+    file_writer = csv.writer(delay_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+    for i in data_delay:
+        file_writer.writerow(i)
+
+# Salva  dados do ganho direto em um csv
+with open('data_gain.csv', mode='w') as gain_file:
+    file_writer = csv.writer(gain_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+    for i in data_gain:
+        file_writer.writerow(i)
+
+
 

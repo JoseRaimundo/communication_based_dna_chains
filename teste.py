@@ -125,9 +125,9 @@ import numpy as np
 # print("z")
 # print((np.arange(0, 50)*10**-6))
 
-teste = np.array([1, 2, 3])
-teste = np.flip(teste, 0)
-print(teste)
+# teste = np.array([1, 2, 3])
+# teste = np.flip(teste, 0)
+# print(teste)
 
 
 
@@ -140,7 +140,7 @@ print(teste)
 # import numpy as np
 
 
-# data = np.genfromtxt('data.csv',delimiter=',')
+# data = np.genfromtxt('data.csv',delimiter=' ')
 
 # tamanhos = [1, 2, 3]
 # cont = 0
@@ -153,3 +153,22 @@ print(teste)
 # plt.xlabel('Frequency [x10 Hz]')
 # plt.ylabel('Delay [s]')
 # plt.show()
+
+
+# import csv
+
+# data = np.genfromtxt('data.csv',delimiter=',')
+# print(data)
+# with open('data.csv') as csv_file:
+#     csv_reader = csv.reader(csv_file, delimiter=' ')
+
+    # for row in csv_reader:
+    #     print(row)
+    #     print("..............")
+
+def contar (valor=11, caractere="+"):
+  for i in range(1,valor):
+    print(caractere)
+contar()
+print("Passando um caractere diferente:")
+contar()

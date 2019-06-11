@@ -36,49 +36,21 @@ def gd():
         if t <= abs(x)/cd:
             continue
         else:
-       
-            gd_temp = (
+    
+            gd_temp = (#np.exp(-t/(2*getTd()))*(
                         (np.cosh(np.sqrt(t**2 - (abs(x)/cd)**2)))/
                             np.sqrt(t**2 - (abs(x)/cd)**2)
                         )
             vec_gd.append(gd_temp)
-                
-            #print("Gd = ",gd_temp)
-                
-    # print("Gd = ",vec_gd)
-    # print("Gd = ",len(vec_gd))
+            
     return vec_gd
-
-
- 
 
 def getB():
     return np.fft.fft(gd())
 
-'''The normalized gain ΓB(f) of the propagation module
-B is the magnitude |B̃(f)| of the TFFT B̃(f) normalized
-by its maximum value max f(|B̃(f)|)'''
-
 def normalizeGain():
     b = getB()
-    return 10*np.log10(abs(b[0:int(b.size/2)])/(np.amax(abs(b[0:int(b.size/2)]))))
-    #return (abs(b.size)/(np.amax(abs(b))))
-    
-# def getPhaseB():
-#     b = getB()
-#     b = b[int(b.size/2):b.size]
-#     #freq = np.fft.fftfreq(b.size, d=0.1)
-#     phaseB = []
-#     for real, imaginary in zip(b.real, b.imag):
-#         if real == 0 and imaginary>0:
-#             phaseB.append(np.pi/2)
-#         elif real == 0 and imaginary<0:
-#             phaseB.append(-np.pi/2)
-#         elif real == 0 and imaginary==0:
-#             phaseB.append(0)
-#         else:
-#             phaseB.append(np.arctan(imaginary/real))
-#     return np.asarray(phaseB)#, freq
+    return 3*np.log10(abs(b[0:int(b.size/2)])/(np.amax(abs(b[0:int(b.size/2)]))))
 
 def getPhaseB():
     b = getB()
@@ -105,15 +77,35 @@ data = []
 for x in distancias:
     if chave:
         chave = False
-        teste = getDelay() + 0.0005
+        teste = getDelay()
     else:
-        teste = teste + getDelay() + 0.0005
+        teste = teste + getDelay() 
     data.append(teste)
 
 
 data = np.transpose(np.asarray(data))
 
-with open('data.csv', mode='w') as employee_file:
+with open('data_delay.csv', mode='w') as employee_file:
+    employee_writer = csv.writer(employee_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+    for i in data:
+        employee_writer.writerow(i)
+
+
+teste = []
+chave = True
+data = [] 
+for x in distancias:
+    if chave:
+        chave = False
+        teste = normalizeGain()
+    else:
+        teste = teste + normalizeGain()
+    data.append(teste)
+
+
+data = np.transpose(np.asarray(data))
+
+with open('data_gain.csv', mode='w') as employee_file:
     employee_writer = csv.writer(employee_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
     for i in data:
         employee_writer.writerow(i)

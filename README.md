@@ -3,4 +3,4 @@
 
 Run
 
-    rm -rf data.csv ; python3.6 main.py >> data.csv ; python3.6 view.py 
+    clear; python3.6 versao.py ; python3.6 main.py 

@@ -48,7 +48,7 @@ def chartGain():
         )
     ]
     layout = go.Layout(
-        title='Delay',
+        title='Gain',
         autosize=False,
         width=600,
         height=600,

@@ -166,9 +166,12 @@ import numpy as np
     #     print(row)
     #     print("..............")
 
-def contar (valor=11, caractere="+"):
-  for i in range(1,valor):
-    print(caractere)
-contar()
-print("Passando um caractere diferente:")
-contar()
+# def contar (valor=11, caractere="+"):
+#   for i in range(1,valor):
+#     print(caractere)
+# contar()
+# print("Passando um caractere diferente:")
+# contar()
+print("Com N = 114", ((5.9e-10)*(114.698**-0.588)))
+print("Com N = 58", ((5.9e-10)*(58.977**-0.588)))
+print("Com N = 36", (5.9e-10)*(36.635**-0.588))

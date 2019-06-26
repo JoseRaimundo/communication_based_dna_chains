@@ -1,4 +1,3 @@
-
 import numpy as np
 import math
 import csv
@@ -20,10 +19,10 @@ def getFrequency(frequecy_max, N):
 
 #Return the diffusin coeficient
 def getD():
-    return ((5.9e-10)*(114.698**-0.588))
+    # return ((5.9e-10)*(114.698**-0.588))
     # return ((5.9e-10)*(58.977**-0.588))
     # return ((5.9e-10)*(36.635**-0.588))
-    # return (10**(-6))
+    return (10**(-6))
 
 # Return the relaxation time
 def getTd():
@@ -47,7 +46,7 @@ def gd():
             gd_temp = np.exp(t/2)*((np.cosh(np.sqrt(t**2 - (abs(x)/cd)**2)))/np.sqrt(t**2 - (abs(x)/cd)**2))
             vec_gd.append(gd_temp)
             
-    return vec_gd
+    return vec_gd[0:190]
 
 def getB():
     return np.fft.fft(gd())
@@ -83,7 +82,7 @@ chave = True
 data = [] 
 cont = 0
 for x in distancias:
-    delay = getDelay()[0:80]
+    delay = getDelay()
     if chave:
         chave = False
         teste = delay + constante
@@ -94,6 +93,7 @@ for x in distancias:
     data.append(teste)
 
 data = np.transpose(np.asarray(data))
+data = data[1:12]
 with open('data_delay2d.csv', mode='w') as employee_file:
     employee_writer = csv.writer(employee_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
     for i in data:

@@ -7,16 +7,16 @@ from pylab import rcParams
 
 def dnaChart2D():
     # data = np.genfromtxt('data_delay2d.csv',delimiter=',')
-    dataOriginal = np.genfromtxt('data_delay2dOriginal.csv',delimiter=',')
+    dataOriginal = np.genfromtxt('data/data_delay2dOriginal.csv',delimiter=',')
     # N = 144
     # D = 3.629
-    a = np.genfromtxt('data_delay2d114.csv',delimiter=',')
+    a = np.genfromtxt('data/data_delay2d114.csv',delimiter=',')
     # N = 58
     # D = 5.366
-    b = np.genfromtxt('data_delay2d58.csv',delimiter=',')
+    b = np.genfromtxt('data/data_delay2d58.csv',delimiter=',')
     # N = 36
     # D = 7.100
-    c = np.genfromtxt('data_delay2d36.csv',delimiter=',')
+    c = np.genfromtxt('data/data_delay2d36.csv',delimiter=',')
 
     distancias = [10, 30, 50]
 

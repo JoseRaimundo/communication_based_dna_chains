@@ -21,8 +21,8 @@ def getFrequency(frequecy_max, N):
 def getD():
     # return ((5.9e-10)*(114.698**-0.588))
     # return ((5.9e-10)*(58.977**-0.588))
-    # return ((5.9e-10)*(36.635**-0.588))
-    return (10**(-6))
+    return ((5.9e-10)*(36.635**-0.588))
+    # return (10**(-6))
 
 # Return the relaxation time
 def getTd():
@@ -53,7 +53,7 @@ def getB():
 
 def normalizeGain():
     b = getB()
-    return 4*np.log10(abs(b[0:int(b.size/2)])/(np.amax(abs(b[0:int(b.size/2)]))))
+    return 3*np.log10(abs(b[0:int(b.size/2)])/(np.amax(abs(b[0:int(b.size/2)]))))
 
 def getPhaseB():
     b = getB()
@@ -76,28 +76,63 @@ def getDelay():
 
 constante = 0.0005
 
-# Descomente essa parte para gerar os gráficos 2D
+# # Descomente essa parte para gerar os gráficos 2D para o delay
+# teste = []
+# chave = True
+# data = [] 
+# cont = 0
+# for x in distancias:
+#     delay = getDelay()
+#     if chave:
+#         chave = False
+#         teste = delay + constante
+#     else:
+#         teste = teste + delay + constante
+    
+
+#     data.append(teste)
+
+# data = np.transpose(np.asarray(data))
+# data = data[1:12]
+# with open('data_delay2d.csv', mode='w') as employee_file:
+#     employee_writer = csv.writer(employee_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+#     for i in data:
+#         employee_writer.writerow(i)
+
+
+
+# Descomente essa parte para gerar os gráficos 2D para o ganho
 teste = []
 chave = True
 data = [] 
 cont = 0
 for x in distancias:
-    delay = getDelay()
+    ganho = normalizeGain()
     if chave:
         chave = False
-        teste = delay + constante
+        teste = ganho 
     else:
-        teste = teste + delay + constante
+        teste = teste + ganho 
     
 
     data.append(teste)
 
 data = np.transpose(np.asarray(data))
-data = data[1:12]
-with open('data_delay2d.csv', mode='w') as employee_file:
+data = data[1:(len(data)-1)]
+with open('data/data_ganho2d36.csv', mode='w') as employee_file:
     employee_writer = csv.writer(employee_file, delimiter=',', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
     for i in data:
         employee_writer.writerow(i)
+
+
+
+
+
+
+
+
+
+
 
 # Descomente essa parte para gerar os gráficos 3D do delay
 # teste = []
